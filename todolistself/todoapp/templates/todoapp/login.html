@@ -1,0 +1,16 @@
+{% extends 'todoapp/main.html' %}
+{% block content %}
+
+<h1>LOGIN PAGE</h1>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">LOGIN</button>
+</form>
+
+
+<p>Don't have an Account? <a href="{% url 'register' %}">Register</a> </p>
+
+
+{% endblock content %}

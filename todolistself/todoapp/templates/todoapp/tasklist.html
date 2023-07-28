@@ -1,0 +1,62 @@
+{% extends 'todoapp/main.html' %}
+{% block content %}
+
+
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+            <h1>Hello, {{request.user|title}}</h1>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+            {% if request.user.is_authenticated %}
+            <!--<p>{{request.user}}</p>-->
+            <button class="btn btn-primary mt-3 float-end"><a href="{% url 'logout' %}" class="text-decoration-none text-white">Logout</a></button>
+            {% else %}
+                <a href="{% url 'login' %}">Login</a>
+            {% endif %}
+
+        </div>
+    </div>
+
+
+
+        <h2>This is your ToDo app</h2>
+        <hr>
+        <h4>You have {{count}} incomplete task</h4>
+
+<button class="btn btn-primary" ><a href="{% url 'task-create' %}" class="text-white text-decoration-none">Add an item</a></button>
+<hr>
+
+
+<form action="" method="GET">
+    <div class="input-group">
+        <div class="form-outline">
+            <input type="text" name="search-area" value="{{search_input}}">
+        </div>
+        <button type="submit" style="border-radius: 4px">Search</button>
+    </div>
+</form>
+
+<hr>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">ITEM</th>
+        <th scope="col"></th>
+    </tr>
+
+    </thead>
+
+
+
+    {% for task in tasks %}
+    <tr class="table fw-normal">
+        <td>{{task.title}}</td>
+        <td><a href="{% url 'task-update' task.id %}" class="text-decoration-none">Edit</a></td>
+        <td><a href="{% url 'task-delete' task.id %}" class="text-decoration-none">Delete</a></td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+{% endblock content %}
+
